@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reh3_app_prod
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./storage:/var/www/storage
+      - ./bootstrap/cache:/var/www/bootstrap/cache
+      - ./database:/var/www/database
+    environment:
+      - "DB_CONNECTION=sqlite"
+      - "DB_DATABASE=/var/www/database/database.sqlite"
+    networks:
+      - reh3_network
+
+  webserver:
+    image: nginx:alpine
+    container_name: reh3_nginx_prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./public:/var/www/public
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/ssl/:/etc/nginx/ssl/
+    networks:
+      - reh3_network
+
+  redis:
+    image: redis:alpine
+    container_name: reh3_redis_prod
+    restart: unless-stopped
+    networks:
+      - reh3_network
+
+networks:
+  reh3_network:
+    driver: bridge 

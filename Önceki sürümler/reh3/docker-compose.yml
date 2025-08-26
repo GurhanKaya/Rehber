@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reh3_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./database:/var/www/database  # SQLite dosyası için
+    environment:
+      - "DB_CONNECTION=sqlite"
+      - "DB_DATABASE=/var/www/database/database.sqlite"
+    networks:
+      - reh3_network
+
+  webserver:
+    image: nginx:alpine
+    container_name: reh3_nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - reh3_network
+
+  redis:
+    image: redis:alpine
+    container_name: reh3_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - reh3_network
+
+networks:
+  reh3_network:
+    driver: bridge 
