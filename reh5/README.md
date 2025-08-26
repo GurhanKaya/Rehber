@@ -1,6 +1,6 @@
-# Reh3 - Laravel Livewire Task Management System
+# Rehber - Laravel Livewire Task Management System
 
-Modern bir görev yönetim sistemi olan Reh3, Laravel ve Livewire kullanılarak geliştirilmiştir. Bu sistem randevu yönetimi, görev takibi ve kullanıcı yönetimi özelliklerini içerir.
+Modern bir görev yönetim sistemi olan Rehber, Laravel ve Livewire kullanılarak geliştirilmiştir. Bu sistem randevu yönetimi, görev takibi ve kullanıcı yönetimi özelliklerini içerir.
 
 ## 🚀 Özellikler
 
