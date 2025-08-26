@@ -46,7 +46,7 @@ php artisan key:generate
 Minimum .env ayarları:
 ```env
 # Uygulama
-APP_NAME=Reh3
+APP_NAME=Reh5
 APP_ENV=local
 APP_KEY=base64:...
 APP_DEBUG=true
@@ -144,31 +144,6 @@ docker-compose up -d
 
 Docker kurulumu için detaylı bilgi: [README-Docker.md](README-Docker.md)
 
-## 📁 Proje Yapısı
-
-```
-reh3/
-├── app/
-│   ├── Http/Controllers/     # HTTP Kontrolcüleri
-│   ├── Livewire/            # Livewire Bileşenleri
-│   │   ├── Admin/          # Admin Paneli
-│   │   ├── Auth/           # Kimlik Doğrulama
-│   │   ├── Guest/          # Misafir Sayfaları
-│   │   ├── Personel/       # Personel Paneli
-│   │   └── Settings/       # Ayarlar
-│   ├── Services/            # Queue, Cache, Performans hizmetleri
-│   ├── Models/             # Eloquent Modelleri
-│   └── Notifications/      # Bildirimler
-├── database/
-│   ├── migrations/         # Veritabanı Migrasyonları
-│   └── seeders/           # Veritabanı Seed'leri
-├── resources/
-│   ├── views/             # Blade Şablonları
-│   ├── css/              # CSS Dosyaları
-│   └── js/               # JavaScript Dosyaları
-└── routes/               # Rota Tanımları
-```
-
 ## 🔧 Kullanım
 
 ### Admin Paneli
@@ -186,15 +161,6 @@ reh3/
 - Randevu rezervasyonu
 - Kullanıcı arama
 
-## 🧪 Test
-
-```bash
-# Tüm testleri çalıştır
-php artisan test
-
-# Belirli bir test dosyasını çalıştır
-php artisan test tests/Feature/Auth/AuthenticationTest.php
-```
 
 ## 📝 Geliştirme
 
@@ -204,27 +170,6 @@ php artisan test tests/Feature/Auth/AuthenticationTest.php
 3. Livewire bileşeni oluşturun: `php artisan make:livewire NewComponent`
 4. View dosyası oluşturun: `resources/views/livewire/new-component.blade.php`
 
-### Kod Stili
-```bash
-# PHP kod stilini düzelt
-./vendor/bin/pint
-
-# JavaScript kod stilini düzelt
-npm run lint
-```
-
-### Livewire, Volt ve Vite
-- Livewire bileşenleri `resources/views/livewire` altında.
-- Volt mount ayarları `App\\Providers\\VoltServiceProvider` içinde tanımlıdır.
-- Vite, `resources/css/app.css` ve `resources/js/app.js` giriş dosyalarını kullanır. HMR için `npm run dev` çalıştırın.
-
-## 🔒 Güvenlik
-
-- Tüm kullanıcı girişleri doğrulanır
-- CSRF koruması aktif
-- SQL injection koruması
-- XSS koruması
-- Dosya yükleme güvenliği
 
 ## 📧 Queue Sistemi (E-posta Gönderimi)
 
@@ -243,13 +188,6 @@ php artisan queue:failed
 php artisan queue:retry all
 ```
 
-### Queue Sistemi Avantajları
-- ✅ E-posta gönderimi 10-100x daha hızlı
-- ✅ Kullanıcı beklemeyecek
-- ✅ Background'da işlenir
-- ✅ SMTP timeout'ları azalır
-- ✅ Sistem performansı artar
-
 ### ⚠️ Önemli Notlar
 - **Her proje başlangıcında queue worker'ı başlatın**
 - **Queue worker olmadan e-postalar yavaş gönderilir**
@@ -257,35 +195,10 @@ php artisan queue:retry all
   - Terminal 1: `php artisan serve`
   - Terminal 2: `php artisan queue:work --queue=default,emails,notifications,tasks --sleep=3 --tries=3`
 
-Prod ortamı için Supervisor kullanmanız önerilir (örnek):
-```ini
-[program:reh3-queue]
-process_name=%(program_name)s_%(process_num)02d
-command=php /var/www/html/artisan queue:work --queue=default,emails,notifications,tasks --sleep=3 --tries=3 --timeout=120
-autostart=true
-autorestart=true
-numprocs=1
-redirect_stderr=true
-stdout_logfile=/var/log/supervisor/reh3-queue.log
-```
-
-## 📄 Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
-## 🤝 Katkıda Bulunma
-
-1. Bu repository'yi fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
-
 ## 📞 İletişim
 
-- Proje Sahibi: [Your Name]
-- Email: [your-email@example.com]
-- GitHub: [@your-username]
+- Proje Sahibi: Gürhan Kaya
+- Email: gurhank2132@gmail.com
 
 ## 🙏 Teşekkürler
 
